@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AV-SEARCH ENGINE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to top left, #FF0000, #FF7F00, #FFFF00, #00FF00, #afafe1, #715386, #ae92c6);
+            background-size: 200% 200%;
+            animation: gradientMove 10s linear infinite;
+            color: rgb(180, 212, 105);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        .overlay {
+            background-color: rgba(71, 73, 57, 0.633);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-top: 15%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-box {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            max-width: 80%;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background-color: #4285f4;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .ai-button,
+        .google-ai-button,
+        .site-button,
+        .google-apps-button,
+        .google-apps-link,
+        .meta-button {
+            background-color: #c0ab96;
+            border: none;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .meta-button {
+            position: absolute;
+            top: 10px; 
+            right: 10px; 
+        }
+
+        .google-apps-button {
+            background-color: rgb(230, 34, 34);
+            border: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute;
+            top: 70px; 
+            right: 10px; 
+        }
+
+        .google-apps-dropdown {
+            display: none;
+            position: absolute;
+            top: 120px; 
+            right: 140px; 
+            background-color: #a6d03d;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(204, 26, 26, 0.3);
+            z-index: 3;
+        }
+
+        .google-apps-button:hover + .google-apps-dropdown,
+        .google-apps-dropdown:hover {
+            display: block;
+        }
+
+        .google-apps-link {
+            display: block;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .google-apps-link:hover {
+            background-color: #555;
+        }
+
+       
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            background-color: #0d0d0c;
+            margin-top: auto;
+            color: #f1f5ec;
+        }
+
+        .footer strong {
+            font-weight: bold;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            font-weight: bold;
+            color: #f8eeef;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+        }
+
+        .profile-icon {
+            width: 20px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-size: 16px;
+            color: white;
+        }
+
+        .search-button,
+        .ai-button,
+        .google-ai-button,
+        .site-button,
+        .google-apps-button,
+        .google-apps-link,
+        .meta-button {
+            font-weight: bold;
+        }
+
+        .social-button {
+            background-color: #2657a5;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .meta-button {
+            background-color: #ddd;
+            border: none;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            position: absolute;
+            top: 120px; 
+            right: 10px; 
+        }
+
+        .meta-dropdown {
+            display: none;
+            position: absolute;
+            top: 35px;
+            right: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .meta-button:hover .meta-dropdown {
+            display: block;
+        }
+
+        .home-icon {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+        }
+
+        .home-text {
+            text-align: center;
+            font-size: 16px;
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-decoration: underline;
+        }
+
+        .duckduckgo-button {
+            background-color: #22170926; 
+        }
+
+       
+        .bing-button {
+            background-color: #87CEEB; 
+        }
+
+        .yahoo-button {
+            background-color: #4325bb; 
+        }
+
+       
+        .youtube-button {
+            background-color: #d10d0d; 
+        }
+
+        .settings-dropdown {
+            display: none;
+            position: absolute;
+            top: 45px;
+            right: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .settings-dropdown a {
+            display: block;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .settings-dropdown a:hover {
+            background-color: #ddd;
+        }
+        .profile-icon {
+            font-size: 25px; 
+            margin-right: 10px; 
+            margin-top: 10px;
+        }
+
+        .settings-icon {
+            font-size: 24px; 
+            margin-right: 20px; 
+        }
+        .Facebook-button{
+            background-color: #4325bb
+        }
+        .whatsapp-button {
+            background-color: rgb(41, 153, 41);
+            color: white;
+        }
+
+      
+        .instagram-button {
+            background-color:#d07b21;
+            color: rgb(246, 241, 238);
+        }
+        .ball {
+            width: 60px;
+            height: 60px;
+            background-color: #8aa3b2;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+      
+        .jump {
+            animation: jump 0.5s ease-in-out alternate infinite;
+        }
+
+       
+        @keyframes jump {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+            }
+        }
+        .blink {
+            animation: blink 0.8s infinite;
+        }
+
+      
+        @keyframes blink {
+            0% {
+                background-color: #4285f4;
+                color: rgb(87, 205, 156);
+            }
+            50% {
+                background-color: #f1c40f;
+                color: #333;
+            }
+            100% {
+                background-color: #4285f4;
+                color: white;
+            }
+        }
+
+        #history-button {
+  background-color: #dde8eb; 
+  color: rgb(19, 18, 18);
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  font-size: 16px;
+  cursor: pointer; 
+  margin-top: 10px; 
+  transition: background-color 0.3s, color 0.3s; 
+}
+.entertainment-button {
+    background-color: #ff5733; /* Change the color as desired */
+    margin-top: -35px;
+}
+
+.entertainment-options {
+    display: none;
+    position: absolute;
+    top: 73px;
+    right: 170px;
+    background-color: #c16534;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(204, 26, 26, 0.3);
+    z-index: 4;
+
+}
+
+.entertainment-button:hover + .entertainment-options,
+.entertainment-options:hover {
+    display: block;
+}
+
+.entertainment-link {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.entertainment-link:hover {
+    background-color: #555;
+    
+}
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+    <div class="user-profile">
+        <i class="fa-solid fa-circle-user profile-icon"></i>
+        <span class="user-name">---AVISHKAR---</span>
+        <div class="settings-dropdown" id="settings-dropdown">
+            <i class="fas fa-cog settings-icon"></i>
+            <a href="#">setting</a>
+            <i class="fa-brands fa-ethereum"></i>
+            <a href="#">themes</a>
+            
+            <br>
+            <i class="fa-solid fa-lock"></i>
+            <ul>
+                
+                <li><a href="#" onclick="openGoogle()">Feedback<br>
+                    <br>
+                . PRIVICY Policy<br>
+                <br>
+                . REPORT</a></li>
+            </ul>
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <a href="#" id="history-button">History</a>
+            <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+            <a href="#">SIGNOUT</a>
+            <i class="fa-sharp fa-solid fa-user"></i>
+            <li><a href="#" id="profileLink">Profile</a></li>
+          
+        </div>
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="search-container">
+        <src="google_logo.png" alt="AV-SEARCH" class="fa-brands fa-searchengin">
+        AV-SEARCH
+        <br>
+        <form action="https://www.google.com/search" method="GET">
+            <input type="text" class="search-box" name="q" placeholder="Search on AV-SEARCH">
+            <input type="submit" value="AV-SEARCH Search" class="search-button">
+        </form>
+        <br>
+        <a href="https://chat.openai.com/" target="_blank" class="ai-button">
+            <i class="fa-solid fa-robot"></i> OPEN-AI
+        </a>
+        <a href="https://bard.google.com/?utm_source=sem&utm_medium=paid-media&utm_campaign=q3enIN_sem7" target="_blank" class="google-ai-button">
+            <i class="fa-solid fa-robot"></i> Google AI
+        </a>
+        <button class="site-button duckduckgo-button" onclick="searchOnSite('https://www.duckduckgo.com/')">
+            <i class="fa-solid fa-magnifying-glass"></i> DUCKDUCKGO
+        </button>
+        <button class="site-button bing-button" onclick="searchOnSite('https://www.bing.com')">
+            <i class="fa-brands fa-microsoft"></i> Bing
+        </button>
+        <button class="site-button yahoo-button" onclick="searchOnSite('https://www.yahoo.com')">
+            <i class="fa-brands fa-yahoo"></i>YAHOO
+        </button>
+        <button class="site-button youtube-button" onclick="searchOnSite('https://www.youtube.com/')">
+            <i class="fa-brands fa-youtube"></i> YouTube
+        </button>
+    </div>
+
+    <div class="home-icon">
+        <i class="fas fa-home"></i>
+    </div>
+
+    <div class="home-text">Home</div>
+
+    <button class="google-apps-button">
+        <i class="fab fa-google"></i> Google Apps
+    </button>
+
+    <div class="google-apps-dropdown">
+        <a href="https://accounts.google.com" class="google-apps-link">
+            <i class="fas fa-user"></i> Google Account
+        </a>
+        <a href="https://www.youtube.com/" class="google-apps-link">
+            <i class="fab fa-youtube"></i> YouTube
+        </a>
+        <a href="https://play.google.com" class="google-apps-link">
+            <i class="fab fa-google-play"></i> Play Store
+        </a>
+        <a href="https://news.google.com/home?hl=en-IN&gl=IN&ceid=IN:en" class="google-apps-link">
+            <i class="far fa-newspaper"></i> News
+        </a>
+        <a href="https://meet.google.com/?hs=197&authuser=0&pli=1" class="google-apps-link">
+            <i class="fab fa-google-plus"></i> Meet
+        </a>
+        <a href="https://mail.google.com/chat/u/0/#onboarding" class="google-apps-link">
+            <i class="far fa-comments"></i> Chat
+        </a>
+        <a href="https://www.google.com/maps/@18.5180554,73.8536679,15z?entry=ttu" class="google-apps-link">
+            <i class="fas fa-map"></i> MAP
+        </a>
+        <a href="https://drive.google.com/drive/my-drive" class="google-apps-link">
+            <i class="fab fa-google-drive"></i> Drive
+        </a>
+        <a href="https://translate.google.com/" class="google-apps-link">
+            <i class="fas fa-language"></i> Translate
+        </a>
+        <a href="https://photos.google.com/?pli=1" class="google-apps-link">
+            <i class="fas fa-photo-film"></i> Photos
+        </a>
+        <a href="https://shopping.google.com/?nord=1&pli=1" class="google-apps-link">
+            <i class="fas fa-cart-shopping"></i> Shopping
+        </a>
+    </div>
+    
+    <div class="meta-button">
+        <i class="fa-brands fa-meta fa-shake"></i> META
+        <div class="meta-dropdown">
+               
+            <button class="social-button" onclick="openSocial('https://www.facebook.com')">
+                <i class="fab fa-facebook"></i> Facebook
+            </button>
+            <button class="social-button whatsapp-button" onclick="openSocial('https://www.whatsapp.com')">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button class="social-button instagram-button" onclick="openSocial('https://www.instagram.com')">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </button>
+        </div>
+    </div>
+
+    <div class="ball" id="myBall"></div>
+
+    <div class="entertainment-dropdown">
+        <button class="google-apps-button entertainment-button">
+            <i class="fas fa-film"></i> Entertainment
+        </button>
+        <div class="entertainment-options">
+            <a href="https://www.zee5.com/" class="entertainment-link">
+                <i class="fas fa-play"></i> Zee5
+            </a>
+            <a href="https://www.sonyliv.com/" class="entertainment-link">
+                <i class="fas fa-play"></i> Sony Liv
+            </a>
+            <a href="https://www.hotstar.com/" class="entertainment-link">
+                <i class="fas fa-play"></i> Disney+ Hotstar
+            </a>
+            <a href="https://www.madstream.one/" class="entertainment-link">
+                <i class="fas fa-tv"></i> Live TV
+            </a>
+
+        </div>
+    </div>
+
+    
+
+    
+
+<div class="footer">
+    &copy; 2023 AV-SEARCH Engine. All rights reserved.
+    <div class="contact-info">
+        Contact us: <br>
+        Gmail: <a href="avishkardavhale@gmail.com">avishkardavhale@gmail.com</a> <br>
+        Phone: +1 (123) 456-7890 <br>
+        Facebook: <a href="https://www.facebook.com/profile.php?id=100030214987577">www.facebook.com/AVPatil</a> <br>
+        Instagram: <a href="https://www.instagram.com/_a.vishkar?igsh=YzljYTk1ODg3Zg==">https://instagram.com/_a.vishkar.</a><br>
+        LINKEDIN:  <a href="https://www.linkedin.com/in/avishkar-davhale-8a7a612ab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Avishkar Davhale</a><LINKEDDIN class="IN"></LINKEDDIN>
+    </div>
+</div>
+
+<script>
+
+
+const historyButton = document.getElementById('history-button');
+historyButton.addEventListener('click', function () {
+  const searchHistory = getSearchHistory();
+  if (searchHistory.length === 0) {
+    alert('Search history is empty.');
+  } else {
+    alert('Search History:\n' + searchHistory.join('\n'));
+  }
+});
+
+function getSearchHistory() {
+  const searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+  return searchHistory || [];
+}
+
+function updateSearchHistory(query) {
+  let searchHistory = getSearchHistory();
+  searchHistory.push(query);
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+}
+
+const searchForm = document.querySelector('form');
+searchForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const query = document.querySelector('.search-box').value;
+  updateSearchHistory(query);
+  window.location.href = `https://www.google.com/search?q=${query}`;
+});
+
+const historyButtonInsideDropdown = document.getElementById('history-button');
+historyButtonInsideDropdown.addEventListener('click', function () {
+  const searchHistory = getSearchHistory();
+  if (searchHistory.length === 0) {
+    alert('Search history is empty.');
+  } else {
+    alert('Search History:\n' + searchHistory.join('\n'));
+  }
+});
+
+const buttons = document.querySelectorAll('.ai-button, .google-ai-button, .duckduckgo-button, .bing-button,.yahoo-button, .youtube-button');
+buttons.forEach((button) => {
+    button.addEventListener('mouseenter', function () {
+        button.classList.add('blink');
+    });
+
+    button.addEventListener('mouseleave', function () {
+        button.classList.remove('blink');
+    });
+});
+
+function searchOnSite(siteURL) {
+    const query = document.querySelector('.search-box').value;
+    window.location.href = `${siteURL}/search?q=${query}`;
+}
+
+const ball = document.getElementById('myBall');
+ball.addEventListener('click', function () {
+    const colors = ['#e74c3c', '#3498db', '#f1c40f', '#2ecc71'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    ball.style.backgroundColor = randomColor;
+    ball.classList.add('jump');
+});
+
+let isDragging = false;
+let offsetX, offsetY;
+
+ball.addEventListener('mousedown', function (e) {
+    isDragging = true;
+    offsetX = e.clientX - ball.getBoundingClientRect().left;
+    offsetY = e.clientY - ball.getBoundingClientRect().top;
+});
+
+document.addEventListener('mousemove', function (e) {
+    if (!isDragging) return;
+    const newX = e.clientX - offsetX;
+    const newY = e.clientY - offsetY;
+    ball.style.left = newX + 'px';
+    ball.style.top = newY + 'px';
+});
+
+document.addEventListener('mouseup', function () {
+    isDragging = false;
+});
+
+function setUsername() {
+    document.getElementById('username').textContent = 'AVISHKAR & AKASH';
+}
+
+document.getElementById('profileLink').addEventListener('click', setUsername);
+
+const profileIcon = document.querySelector(".profile-icon");
+const settingsDropdown = document.getElementById("settings-dropdown");
+profileIcon.addEventListener("click", function (event) {
+    event.stopPropagation();
+    settingsDropdown.style.display = settingsDropdown.style.display === "block" ? "none" : "block";
+});
+
+document.body.addEventListener("click", function () {
+    settingsDropdown.style.display = "none";
+});
+
+settingsDropdown.addEventListener("click", function (event) {
+    event.stopPropagation();
+});
+
+function openSocial(url) {
+    window.open(url, '_blank');
+}
+
+const metaButton = document.querySelector(".meta-button");
+const metaDropdown = document.querySelector(".meta-dropdown");
+metaButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    metaDropdown.style.display = metaDropdown.style.display === "block" ? "none" : "block";
+});
+
+document.body.addEventListener("click", function () {
+    metaDropdown.style.display = "none";
+});
+
+metaDropdown.addEventListener("click", function (event) {
+    event.stopPropagation();
+});
+
+const privacyPolicyLink = document.querySelector(".settings-dropdown a[href='#privacy']");
+privacyPolicyLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    window.open("http://127.0.0.1:5500/index.html/pro.html", "_blank");
+});
+
+
+
+
+
+const entertainmentButton = document.querySelector(".entertainment-button");
+const entertainmentOptions = document.querySelector(".entertainment-options");
+
+entertainmentButton.addEventListener("click", function (event) {
+    event.stopPropagation();
+    entertainmentOptions.style.display =
+        entertainmentOptions.style.display === "block" ? "none" : "block";
+});
+
+document.body.addEventListener("click", function () {
+    entertainmentOptions.style.display = "none";
+});
+
+entertainmentOptions.addEventListener("click", function (event) {
+    event.stopPropagation();
+});
+
+
+function toggleMenu() {
+            var menu = document.getElementById("menu-options");
+            if (menu.style.display === "none" || menu.style.display === "") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+
+        function openGoogle() { window.open("https://avishkarhacker.github.io/Feedback/");
+        }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
