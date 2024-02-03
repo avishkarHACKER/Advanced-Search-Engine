@@ -441,7 +441,7 @@
 
     <div class="user-profile">
         <i class="fa-solid fa-circle-user profile-icon"></i>
-        <span class="user-name">---AVISHKAR---</span>
+        <span class="user-name">USER : AVISHKAR</span>
         <div class="settings-dropdown" id="settings-dropdown">
             <i class="fas fa-cog settings-icon"></i>
             <a href="#">setting</a>
@@ -466,6 +466,9 @@
             <a href="#">SIGN-IN</a>
             <i class="fa-sharp fa-solid fa-user"></i>
             <button onclick="login()">Login</button>
+            <i class="fa-sharp fa-solid fa-sign-out"></i>
+            <a href="#" onclick="logout()">Logout</a>
+            <br>
             <i class="fa-sharp fa-solid fa-user"></i>
             <li><a href="#" id="profileLink">Profile</a></li>
            
@@ -624,6 +627,18 @@ LINKEDIN:  <a href="https://www.linkedin.com/in/avishkar-davhale-8a7a612ab?utm_s
 </div>
 
 <script>
+
+function logout() {
+    // Set default username
+    const defaultUsername = "USER-AVISHKAR";
+    document.querySelector('.user-name').textContent = defaultUsername;
+
+    // Clear saved username from localStorage
+    localStorage.removeItem('username');
+}
+
+
+
  function saveUsername(username) {
     localStorage.setItem('username', username);
 }
