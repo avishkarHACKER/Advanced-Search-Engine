@@ -436,7 +436,7 @@
     </style>
 </head>
 <body>
-
+   
 
 
     <div class="user-profile">
@@ -480,6 +480,11 @@
           
         </div>
     </div>
+    <div>
+    <form action="https://www.google.com/search" method="GET">
+    
+
+</form></div>
 
     <div class="overlay"></div>
 
@@ -629,6 +634,25 @@ LINKEDIN:  <a href="https://www.linkedin.com/in/avishkar-davhale-8a7a612ab?utm_s
 </div>
 
 <script>
+    const searchForm = document.querySelector('form');
+searchForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const query = document.querySelector('.search-box').value;
+  window.location.href = `https://www.google.com/search?q=${query}`;
+});
+
+
+
+
+function updateSearchHistory(query) {
+    let searchHistory = getSearchHistory();
+    searchHistory.push(query);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    // Update recent searches on the page if needed
+    // updateRecentSearches();
+}
+
+
 
 function logout() {
     // Set default username
@@ -685,13 +709,6 @@ function getSearchHistory() {
 
 
 
-const searchForm = document.querySelector('form');
-searchForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const query = document.querySelector('.search-box').value;
-  updateSearchHistory(query);
-  window.location.href = `https://www.google.com/search?q=${query}`;
-});
 
 const historyButtonInsideDropdown = document.getElementById('history-button');
 historyButtonInsideDropdown.addEventListener('click', function () {
