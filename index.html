@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,6 +149,8 @@
             color: #f8eeef;
         }
 
+
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -168,6 +171,11 @@
             font-size: 16px;
             color: white;
         }
+        .dark-theme {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
 
         .search-button,
         .ai-button,
@@ -411,6 +419,7 @@
             <a href="#">setting</a>
             <i class="fa-brands fa-ethereum"></i>
             <a href="#">themes</a>
+            <button onclick="toggleTheme()">Toggle Theme</button>
             
             <br>
             <i class="fa-solid fa-lock"></i>
@@ -426,9 +435,15 @@
             <i class="fa-solid fa-clock-rotate-left"></i>
             <a href="#" id="history-button">History</a>
             <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
-            <a href="#">SIGNOUT</a>
+            <a href="#">SIGN-IN</a>
+            <i class="fa-sharp fa-solid fa-user"></i>
+            <button onclick="login()">Login</button>
             <i class="fa-sharp fa-solid fa-user"></i>
             <li><a href="#" id="profileLink">Profile</a></li>
+           
+          
+           
+
           
         </div>
     </div>
@@ -573,13 +588,28 @@ LINKEDIN:  <a href="https://www.linkedin.com/in/avishkar-davhale-8a7a612ab?utm_s
  Gmail: <a href="avishkardavhale@gmail.com">avishkardavhale@gmail.com</a> <br>
         
 
-
+
+
         
         
     </div>
 </div>
 
 <script>
+ 
+
+    function login() {
+    const username = prompt('Enter your username:');
+    if (username) {
+        document.querySelector('.user-name').textContent = username;
+    }
+}
+
+ 
+    function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle("dark-theme");
+}
 
 
 const historyButton = document.getElementById('history-button');
@@ -597,11 +627,7 @@ function getSearchHistory() {
   return searchHistory || [];
 }
 
-function updateSearchHistory(query) {
-  let searchHistory = getSearchHistory();
-  searchHistory.push(query);
-  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-}
+
 
 const searchForm = document.querySelector('form');
 searchForm.addEventListener('submit', function (e) {
@@ -620,6 +646,27 @@ historyButtonInsideDropdown.addEventListener('click', function () {
     alert('Search History:\n' + searchHistory.join('\n'));
   }
 });
+function updateSearchHistory(query) {
+    let searchHistory = getSearchHistory();
+    searchHistory.push(query);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+
+    // Update recent searches on the page
+    updateRecentSearches();
+}
+
+function updateRecentSearches() {
+    const recentSearchList = document.getElementById('recentSearchList');
+    recentSearchList.innerHTML = '';
+    const searchHistory = getSearchHistory();
+    searchHistory.slice(0, 5).forEach((search) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = search;
+        recentSearchList.appendChild(listItem);
+    });
+}
+
+
 
 const buttons = document.querySelectorAll('.ai-button, .google-ai-button, .duckduckgo-button, .bing-button,.yahoo-button, .youtube-button');
 buttons.forEach((button) => {
