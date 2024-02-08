@@ -503,9 +503,11 @@
         <a href="https://bard.google.com/?utm_source=sem&utm_medium=paid-media&utm_campaign=q3enIN_sem7" target="_blank" class="google-ai-button">
             <i class="fa-solid fa-robot"></i> Google AI
         </a>
-        <button class="site-button duckduckgo-button" onclick="searchOnSite('https://www.duckduckgo.com/')">
+        
+        </button> <button class="site-button duckduckgo-button" onclick="searchOnDuckDuckGo()">
             <i class="fa-solid fa-magnifying-glass"></i> DUCKDUCKGO
         </button>
+
         <button class="site-button bing-button" onclick="searchOnSite('https://www.bing.com')">
             <i class="fa-brands fa-microsoft"></i> Bing
         </button>
@@ -634,6 +636,13 @@ LINKEDIN:  <a href="https://www.linkedin.com/in/avishkar-davhale-8a7a612ab?utm_s
 </div>
 
 <script>
+      function searchOnDuckDuckGo() {
+            const query = document.querySelector('.search-box').value;
+            window.location.href = `https://duckduckgo.com/?q=${query}`;
+        }
+
+
+
     const searchForm = document.querySelector('form');
 searchForm.addEventListener('submit', function (e) {
   e.preventDefault();
