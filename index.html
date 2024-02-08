@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,8 +170,8 @@
         }
 
         .user-name {
-            font-size: 16px;
-            color: white;
+            font-size: 20px;
+            color: rgb(255, 255, 255);
         }
         .dark-theme {
     background: #2c3e50;
@@ -381,7 +382,7 @@
         }
 
         #history-button {
-  background-color: #dde8eb; 
+  background-color: #76ce9e; 
   color: rgb(19, 18, 18);
   border: none; 
   padding: 10px 20px; 
@@ -441,23 +442,22 @@
 
     <div class="user-profile">
         <i class="fa-solid fa-circle-user profile-icon"></i>
-        <span class="user-name">USER : AVISHKAR</span>
+        <span class="user-name">𝙐𝙎𝙀𝙍 : 𝘼𝙑𝙄𝙎𝙃𝙆𝘼𝙍</span>
         <div class="settings-dropdown" id="settings-dropdown">
             <i class="fas fa-cog settings-icon"></i>
             <a href="#">setting</a>
             <i class="fa-brands fa-ethereum"></i>
             <a href="#">themes</a>
-            <button onclick="toggleTheme()">Toggle Theme</button>
+            <a onclick="toggleTheme()">Toggle Theme</a>
             
             <br>
             <i class="fa-solid fa-lock"></i>
             <ul>
                 
-                <li><a href="#" onclick="openGoogle()">Feedback<br>
-                    <br>
-                . PRIVICY Policy<br>
-                <br>
-                . REPORT</a></li>
+                <li><a href="#" onclick="openGoogle()">Feedback <br>
+                    *<br>
+         PRIVICY POLICY<br>
+                *<br> REPORT</a></li>
             </ul>
 
             <i class="fa-solid fa-clock-rotate-left"></i>
@@ -465,7 +465,7 @@
             <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
             <a href="#">SIGN-IN</a>
             
-            <button onclick="login()">Login</button>
+            <a onclick="login()">Login</a>
             <br>
             <i class="fa-sharp fa-solid fa-sign-out"></i>
             <a href="#">SIGN-OUT</a>
@@ -679,7 +679,7 @@ function getSavedUsername() {
     const username = prompt('Enter your username:', savedUsername || '');
     
     if (username) {
-        document.querySelector('.user-name').textContent = "NEW-USER: " + username;
+        document.querySelector('.user-name').textContent = "𝙉𝙀𝙒-𝙐𝙎𝙀𝙍 : " + username;
         saveUsername(username);
     }
 }
