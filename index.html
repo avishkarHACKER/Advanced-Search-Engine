@@ -297,17 +297,19 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 2;
 }
-
 .settings-dropdown {
     display: none;
     position: absolute;
-    top: calc(100% + 10px); /* Updated positioning */
+    top: calc(100% + 10px);
     right: 10px;
+    max-height: 523px; /* Set your desired max height */
+    overflow-y: auto; /* Enable vertical scrolling */
     background-color: #5ecca0;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 2;
 }
+
 .settings-dropdown a:hover {
     background-color: #ddd;
 }
