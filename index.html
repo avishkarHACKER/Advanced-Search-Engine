@@ -666,6 +666,12 @@ MOBILE USERS USE DESKTOP MOD AND ROTATE PHONE<br>
 
 <script>
 
+     document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+
+    
+
 const searchForm = document.querySelector('form');
 searchForm.addEventListener('submit', function (e) {
   e.preventDefault();
