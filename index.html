@@ -134,13 +134,24 @@
 
 
         .footer {
-            text-align: center;
-            padding: 10px;
-            font-size: 12px;
-            background-color: #0d0d0c;
-            margin-top: auto;
-            color: #f1f5ec;
-        }
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    background-color: #0d0d0c;
+    margin-top: auto;
+    color: #f1f5ec;
+    opacity: 0; /* Initial opacity set to 0 for the fade-in effect */
+    animation: fadeIn 1s forwards; /* Animation properties */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
         .footer strong {
             font-weight: bold;
