@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -437,7 +438,8 @@
     </style>
 </head>
 <body>
-   
+    <ul id="recentSearchList"></ul>
+
 
 
     <div class="user-profile">
@@ -448,7 +450,12 @@
             <a href="#">setting</a>
             <i class="fa-brands fa-ethereum"></i>
             <a href="#">themes</a>
-            <a onclick="toggleTheme()">Toggle Theme</a>
+
+            <i class="fas fa-cog settings-icon"></i>
+<a href="#">setting</a>
+<i class="fa-brands fa-ethereum"></i>
+<a onclick="selectTheme('dark')">Dark Theme</a>
+<a onclick="selectTheme('light')">Colorfull Theme</a>
             
             <br>
             <i class="fa-solid fa-lock"></i>
@@ -636,19 +643,32 @@ LINKEDIN:  <a href="https://www.linkedin.com/in/avishkar-davhale-8a7a612ab?utm_s
 </div>
 
 <script>
+
+const searchForm = document.querySelector('form');
+searchForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const query = document.querySelector('.search-box').value;
+  window.location.href = `https://www.google.com/search?q=${query}`;
+  updateSearchHistory(query);
+  updateRecentSearches();  // Add this line
+});
+
+function selectTheme(theme) {
+  const body = document.body;
+  body.classList.toggle("dark-theme", theme === 'dark');
+}
+
+
+
+
+
+
+
       function searchOnDuckDuckGo() {
             const query = document.querySelector('.search-box').value;
             window.location.href = `https://duckduckgo.com/?q=${query}`;
         }
 
-
-
-    const searchForm = document.querySelector('form');
-searchForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const query = document.querySelector('.search-box').value;
-  window.location.href = `https://www.google.com/search?q=${query}`;
-});
 
 
 
