@@ -458,16 +458,43 @@
 
 
 
+body {
+      margin: 0;
+      overflow: hidden;
+    }
 
+    #watch {
+      position: fixed;
+      top: 40px;
+      left: 60px;
+      background-color: transparent; /* Remove background */
+      padding: 10px;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      color: rgb(138, 106, 173); /* Set text color to black */
+      animation: scaleAnimation 0.5s ease infinite alternate; /* Add animation */
+    }
 
+    #watch b {
+      font-weight: bold; /* Make the hours, minutes, and seconds bold */
+    }
 
+    @keyframes scaleAnimation {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.1);
+      }
+    }
 
 
     </style>
 </head>
 <body>
     <ul id="recentSearchList"></ul>
-
+    <div id="watch"></div>
 
 
     <div class="user-profile">
@@ -680,6 +707,25 @@ MOBILE USERS USE DESKTOP MOD AND ROTATE PHONE<br>
      document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
     });
+
+    function updateWatch() {
+      const watchElement = document.getElementById('watch');
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+
+      watchElement.innerHTML = `<b>${hours}</b> : <b>${minutes}</b> : <b>${seconds}</b>`;
+    }
+
+    // Update the watch every second
+    setInterval(updateWatch, 1000);
+
+    // Initial update
+    updateWatch();
+
+
+
 
     
 
